@@ -93,7 +93,6 @@ ImageCollection.prototype.addImage = function(image) {
   this.size = this.imageArray.length;
 }
 
-// Log all possible images
 var allImages = new ImageCollection();
 
 for (var i = 0; i < imageData.length; i++) {
@@ -104,8 +103,6 @@ for (var i = 0; i < imageData.length; i++) {
 
 console.log(allImages);
 
-// randomize arrays to pop numbers out of to ensure no duplicates
-// repopulate array everytime we show 3 new items
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -118,7 +115,6 @@ function shuffle(array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-
   return array;
 }
 
@@ -138,8 +134,6 @@ function showThreeNewImages() {
     newImgDocumentElement = document.createElement('img');
     newImgDocumentElement.src = currentImage.filepath;
     newImgDocumentElement.id = currentImage.id;
-    // newImgDocumentElement.width = 300;
-    // newImgDocumentElement.height = 300;
     container.appendChild(newImgDocumentElement);
     currentImage.incrementDisplayCount();
   }
