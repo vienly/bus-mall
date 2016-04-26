@@ -1,6 +1,6 @@
 'use strict';
 
-var trials = 10;
+var trials = 25;
 var imageData = [['bag', 'jpg'],
                   ['banana', 'jpg'],
                   ['bathroom', 'jpg'],
@@ -147,7 +147,6 @@ function showThreeNewImages() {
 }
 
 showThreeNewImages();
-var clickedOnDiv;
 
 var bigContainer = document.getElementById('all-image-container');
 bigContainer.addEventListener('click', processSelection);
