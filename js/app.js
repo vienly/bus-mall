@@ -33,13 +33,13 @@ class Image {
     this.filepath = '../assets/img/' + name + '.' + this.extension;
     this.displayN = 0;
     this.clickN = 0;
-    this.percentage = 0;
+    this.percentage = this.calculatePercentage();
   }
 }
 
 Image.prototype.calculatePercentage = function() {
   if(this.displayN) {
-    return this.clickN/this.displayN;
+    return (this.clickN/this.displayN * 100).toFixed(2);
   } else {
     return 'never been displayed';
   }
@@ -182,7 +182,7 @@ function displayResult() {
 
   for (var i = 0; i < allImages.imageArray.length; i++) {
     var item = document.createElement('li');
-    item.textContent = (allImages.imageArray[i].name + ' has been clicked ' + allImages.imageArray[i].clickN + ' times out of ' + allImages.imageArray[i].displayN + ' times displayed.');
+    item.textContent = (allImages.imageArray[i].name + ' has been clicked ' + allImages.imageArray[i].clickN + ' times out of ' + allImages.imageArray[i].displayN + ' times displayed. Selection percentage: ' + allImages.imageArray[i].percentage);
     resultList.appendChild(item);
   }
   resultContainer.appendChild(resultList);
