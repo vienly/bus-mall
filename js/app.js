@@ -124,7 +124,6 @@ function shuffle(array) {
 
 function showThreeNewImages() {
   var container;
-  // var randomImg;
   var newImgDocumentElement;
   var currentImage;
 
@@ -185,7 +184,6 @@ function addMoreTrials() {
   showThreeNewImages();
   moreTrialsButton.style.visibility = 'hidden';
   resultButton.style.visibility = 'hidden';
-
 }
 
 function displayResult() {
@@ -200,7 +198,7 @@ function displayResult() {
 
   for (var i = 0; i < allImages.imageArray.length; i++) {
     var item = document.createElement('li');
-    item.textContent = (allImages.imageArray[i].name + '. Clicked: ' + allImages.imageArray[i].clickN + '. Displayed: ' + allImages.imageArray[i].displayN + '. Selection percentage: ' + allImages.imageArray[i].percentage);
+    item.textContent = (allImages.imageArray[i].name.toUpperCase() + '. Clicked: ' + allImages.imageArray[i].clickN + '. Displayed: ' + allImages.imageArray[i].displayN + '. Selection percentage: ' + allImages.imageArray[i].percentage);
     resultList.appendChild(item);
   }
 
