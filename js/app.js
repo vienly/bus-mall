@@ -150,6 +150,7 @@ showThreeNewImages();
 
 var bigContainer = document.getElementById('all-image-container');
 bigContainer.addEventListener('click', processSelection);
+var moreTrialsButton = document.getElementById('more-trials-button');
 
 function processSelection(event) {
   if(trials) {
@@ -166,6 +167,7 @@ function processSelection(event) {
     trials--;
   } else {
     alert('you\'re done!');
+    moreTrialsButton.style.visibility = 'visible';
     displayResult();
     console.log(resultContainer.firstChild);
   }
