@@ -156,9 +156,10 @@ function processSelection(event) {
     var clickedOnDiv = Number.parseInt(event.target.parentNode.getAttribute('id').charAt(15));
 
     if(!isNaN(clickedOnDiv)) {
-      currentThree[clickedOnDiv].incrementClickCount();
-      console.log(currentThree[clickedOnDiv].name + ' has been clicked on ' + currentThree[clickedOnDiv].clickN + ' times');
-      console.log(currentThree[clickedOnDiv].name + ' has been displayed ' + currentThree[clickedOnDiv].displayN + ' times');
+      var selectedImage = currentThree[clickedOnDiv];
+      selectedImage.incrementClickCount();
+      console.log(selectedImage.name + ' has been clicked on ' + selectedImage.clickN + ' times');
+      console.log(selectedImage.name + ' has been displayed ' + selectedImage.displayN + ' times');
 
       showThreeNewImages();
     }
