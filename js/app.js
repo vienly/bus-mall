@@ -189,6 +189,9 @@ function addMoreTrials() {
 }
 
 function displayResult() {
+  var resultHeader = document.createElement('h1');
+  resultHeader.textContent = 'RESULTS';
+
   while(resultContainer.firstChild) {
     resultContainer.removeChild(resultContainer.firstChild);
   }
@@ -197,9 +200,11 @@ function displayResult() {
 
   for (var i = 0; i < allImages.imageArray.length; i++) {
     var item = document.createElement('li');
-    item.textContent = (allImages.imageArray[i].name + ' has been clicked ' + allImages.imageArray[i].clickN + ' times out of ' + allImages.imageArray[i].displayN + ' times displayed. Selection percentage: ' + allImages.imageArray[i].percentage);
+    item.textContent = (allImages.imageArray[i].name + '. Clicked: ' + allImages.imageArray[i].clickN + '. Displayed: ' + allImages.imageArray[i].displayN + '. Selection percentage: ' + allImages.imageArray[i].percentage);
     resultList.appendChild(item);
   }
+
+  resultContainer.appendChild(resultHeader);
   resultContainer.appendChild(resultList);
   moreTrialsButton.style.visibility = 'hidden';
   resultButton.style.visibility = 'hidden';
