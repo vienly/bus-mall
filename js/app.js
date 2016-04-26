@@ -138,8 +138,8 @@ function showThreeNewImages() {
     newImgDocumentElement = document.createElement('img');
     newImgDocumentElement.src = currentImage.filepath;
     newImgDocumentElement.id = currentImage.id;
-    newImgDocumentElement.width = 300;
-    newImgDocumentElement.height = 300;
+    // newImgDocumentElement.width = 300;
+    // newImgDocumentElement.height = 300;
     container.appendChild(newImgDocumentElement);
     currentImage.incrementDisplayCount();
   }
