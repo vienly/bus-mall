@@ -147,7 +147,11 @@ bigContainer.addEventListener('click', processSelection);
 var moreTrialsButton = document.getElementById('more-trials-button');
 moreTrialsButton.addEventListener('click', addMoreTrials);
 var resultButton = document.getElementById('result-button');
-resultButton.addEventListener('click', displayResult);
+resultButton.addEventListener('click', function() {
+  displayResult();
+  displayChart();
+});
+
 var resultContainer = document.getElementById('result-container');
 
 function processSelection(event) {
@@ -200,4 +204,65 @@ function displayResult() {
   resultContainer.appendChild(resultList);
   moreTrialsButton.style.visibility = 'hidden';
   resultButton.style.visibility = 'hidden';
+}
+
+// charting
+var chartCanvasContainer = document.getElementById('chart-canvas-container');
+
+function displayChart() {
+  while (chartCanvasContainer.firstChild) {
+    chartCanvasContainer.removeChild(chartCanvasContainer.firstChild);
+  }
+  var chartCanvas = document.createElement('canvas');
+  chartCanvas.getContext('2d');
+  chartCanvasContainer.appendChild(chartCanvas);
+
+  var titles = new Array();
+  var clickData = new Array();
+  var displayData = new Array();
+
+  for (var k = 0; k < allImages.imageArray.length; k++) {
+    titles.push(allImages.imageArray[k].name);
+    clickData.push(allImages.imageArray[k].clickN);
+    displayData.push(allImages.imageArray[k].displayN);
+  }
+
+  var chartData = {
+    labels: titles,
+    datasets: [
+      {
+        label: "Times Displayed",
+        backgroundColor: "rgba(204,51,17,1)",
+        borderColor: "rgba(204,51,17,1)",
+        borderWidth: 1,
+        // hoverBackgroundColor: "rgba(255,99,132,0.4)",
+        // hoverBorderColor: "rgba(255,99,132,1)",
+        data: displayData,
+        yAxisID: "y-axis-0",
+      },
+      {
+        label: "Times Selected",
+        backgroundColor: "rgba(0,0,0,1)",
+        borderColor: "rgba(0,0,0,1)",
+        borderWidth: 1,
+        // hoverBackgroundColor: "rgba(54,162,235,0.4)",
+        // hoverBorderColor: "rgba(54,162,235,1)",
+        data: clickData
+      }
+    ]
+  };
+
+  var chartOptions = {
+	defaultFontColor: 'black',
+	defaultFontFamily: 'Fauna One',
+  defaultFontStyle: 'cursive'
+}
+
+  var myBarChart = new Chart(chartCanvas.getContext('2d'), {
+      type: 'bar',
+      data: chartData,
+      options: chartOptions
+  })
+
+  chartCanvasContainer.appendChild(chartCanvas);
 }

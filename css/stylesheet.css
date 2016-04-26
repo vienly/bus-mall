@@ -101,7 +101,8 @@ button {
 button:hover {
   color: #c31;
   border-color: black;
-  outline: 0; }
+  outline: 0;
+}
 
 /*button.button-primary {
   color: black;
