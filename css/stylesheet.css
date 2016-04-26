@@ -37,19 +37,23 @@ h1 {
 }
 
 .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   margin: 15px;
   /*max-height: 250px;*/
   border-style: solid;
   border-width: thin;
   border-color: black;
-  max-height: 250px;
   /*width: auto;*/
+  width: 250px;
+  height: 250px;
 }
 
 img {
   max-height: 250px;
-  max-width: 250px
+  max-width: 250px;
   width: auto;
   height: auto;
 }
