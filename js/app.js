@@ -22,7 +22,7 @@ var imageData = [['bag', 'jpg'],
                   ['water-can', 'jpg'],
                   ['wine-glass', 'jpg']
                 ];
-
+var allImages;
 var currentThree = new Array();
 
 class Image {
@@ -93,13 +93,16 @@ ImageCollection.prototype.addImage = function(image) {
   this.size = this.imageArray.length;
 }
 
-var allImages = new ImageCollection();
 
-for (var i = 0; i < imageData.length; i++) {
-  var currentData = imageData[i];
-  var newImage = new Image(currentData[0],currentData[1]);
-  allImages.addImage(newImage);
+function collectAllImages() {
+  allImages = new ImageCollection();
+  for (var i = 0; i < imageData.length; i++) {
+    var currentData = imageData[i];
+    var newImage = new Image(currentData[0],currentData[1]);
+    allImages.addImage(newImage);
+  }
 }
+collectAllImages();
 
 console.log(allImages);
 
@@ -144,14 +147,10 @@ showThreeNewImages();
 // DOM
 var bigContainer = document.getElementById('all-image-container');
 bigContainer.addEventListener('click', processSelection);
-var moreTrialsButton = document.getElementById('more-trials-button');
-moreTrialsButton.addEventListener('click', addMoreTrials);
-var resultButton = document.getElementById('result-button');
-resultButton.addEventListener('click', function() {
-  displayResult();
-  displayChart();
-});
+var buttonContainer = document.getElementById('button-container');
 var resultContainer = document.getElementById('result-container');
+var moreTrialsButton;
+var resultButton;
 
 function processSelection(event) {
   if(trials) {
@@ -166,8 +165,9 @@ function processSelection(event) {
     trials--;
     if(trials <= 0) {
       alert('done');
-      moreTrialsButton.style.visibility = 'visible';
-      resultButton.style.visibility = 'visible';
+      addButtons();
+      // moreTrialsButton.style.visibility = 'visible';
+      // resultButton.style.visibility = 'visible';
 
     } else {
       showThreeNewImages();
@@ -180,8 +180,9 @@ function processSelection(event) {
 function addMoreTrials() {
   trials += 10;
   showThreeNewImages();
-  moreTrialsButton.style.visibility = 'hidden';
-  resultButton.style.visibility = 'hidden';
+  removeButtons();
+  // moreTrialsButton.style.visibility = 'hidden';
+  // resultButton.style.visibility = 'hidden';
 }
 
 function displayResult() {
@@ -199,11 +200,11 @@ function displayResult() {
     item.textContent = (allImages.imageArray[i].name.toUpperCase() + '. Clicked: ' + allImages.imageArray[i].clickN + '. Displayed: ' + allImages.imageArray[i].displayN + '. Selection percentage: ' + allImages.imageArray[i].percentage);
     resultList.appendChild(item);
   }
-
+  showResetButton();
   resultContainer.appendChild(resultHeader);
   resultContainer.appendChild(resultList);
-  moreTrialsButton.style.visibility = 'hidden';
-  resultButton.style.visibility = 'hidden';
+  // moreTrialsButton.style.visibility = 'hidden';
+  // resultButton.style.visibility = 'hidden';
 }
 
 // charting
@@ -257,4 +258,57 @@ function displayChart() {
   });
 
   chartCanvasContainer.appendChild(chartCanvas);
+}
+
+function showResetButton() {
+  removeButtons();
+  var resetButton = document.createElement('button');
+  resetButton.textContent = 'Reset';
+  resetButton.style.margin = '5px';
+  resetButton.addEventListener('click', reset);
+  buttonContainer.appendChild(resetButton);
+}
+
+function reset() {
+  trials = 5;
+  collectAllImages();
+  showThreeNewImages();
+
+  removeButtons();
+  removeResult();
+  removeChart();
+}
+
+function addButtons() {
+  moreTrialsButton = document.createElement('button');
+  resultButton = document.createElement('button');
+  moreTrialsButton.textContent = '10 more trials';
+  resultButton.textContent = 'display result';
+  moreTrialsButton.style.margin = '5px';
+  resultButton.style.margin = '5px';
+  moreTrialsButton.addEventListener('click', addMoreTrials);
+  resultButton.addEventListener('click', function() {
+    displayResult();
+    displayChart();
+  });
+  buttonContainer.appendChild(moreTrialsButton);
+  buttonContainer.appendChild(resultButton);
+}
+
+function removeButtons() {
+  while (buttonContainer.firstChild) {
+    buttonContainer.removeChild(buttonContainer.firstChild);
+  }
+}
+
+function removeResult() {
+  while(resultContainer.firstChild) {
+    resultContainer.removeChild(resultContainer.firstChild);
+  }
+}
+
+function removeChart() {
+  while (chartCanvasContainer.firstChild) {
+    chartCanvasContainer.removeChild(chartCanvasContainer.firstChild);
+  }
 }

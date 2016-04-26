@@ -57,7 +57,7 @@ img {
   height: auto;
 }
 
-.buttons {
+.button-container {
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -66,7 +66,7 @@ img {
   /*visibility: hidden;*/
 }
 
-.more-trials-button {
+/*.more-trials-button {
   visibility: hidden;
   margin: 10px;
 }
@@ -74,7 +74,7 @@ img {
 .result-button {
   visibility: hidden;
   margin: 10px;
-}
+}*/
 
 .result-container {
   display: flex;
