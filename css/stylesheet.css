@@ -17,8 +17,6 @@ h1 {
 .body-wrapper {
   display: flex;
   flex-direction: column;
-  /*justify-content: center;
-  align-items: center;*/
 }
 
 .images-and-buttons {

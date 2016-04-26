@@ -166,9 +166,6 @@ function processSelection(event) {
     if(trials <= 0) {
       alert('done');
       addButtons();
-      // moreTrialsButton.style.visibility = 'visible';
-      // resultButton.style.visibility = 'visible';
-
     } else {
       showThreeNewImages();
     }
@@ -181,8 +178,6 @@ function addMoreTrials() {
   trials += 10;
   showThreeNewImages();
   removeButtons();
-  // moreTrialsButton.style.visibility = 'hidden';
-  // resultButton.style.visibility = 'hidden';
 }
 
 function displayResult() {
