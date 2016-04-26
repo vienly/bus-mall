@@ -19,6 +19,17 @@ img {
   width: auto;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+
 .more-trials-button {
+  visibility: hidden;
+}
+
+.result-button {
   visibility: hidden;
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-var trials = 25;
+var trials = 5;
 var imageData = [['bag', 'jpg'],
                   ['banana', 'jpg'],
                   ['bathroom', 'jpg'],
@@ -151,6 +151,11 @@ showThreeNewImages();
 var bigContainer = document.getElementById('all-image-container');
 bigContainer.addEventListener('click', processSelection);
 var moreTrialsButton = document.getElementById('more-trials-button');
+moreTrialsButton.addEventListener('click', addMoreTrials);
+var resultButton = document.getElementById('result-button');
+resultButton.addEventListener('click', displayResult);
+
+var resultContainer = document.getElementById('result-container');
 
 function processSelection(event) {
   if(trials) {
@@ -161,19 +166,27 @@ function processSelection(event) {
       selectedImage.incrementClickCount();
       console.log(selectedImage.name + ' has been clicked on ' + selectedImage.clickN + ' times');
       console.log(selectedImage.name + ' has been displayed ' + selectedImage.displayN + ' times');
-
-      showThreeNewImages();
     }
     trials--;
+    if(trials <= 0) {
+      alert('done');
+      moreTrialsButton.style.visibility = 'visible';
+      resultButton.style.visibility = 'visible';
+    } else {
+      showThreeNewImages();
+    }
   } else {
-    alert('you\'re done!');
-    moreTrialsButton.style.visibility = 'visible';
-    displayResult();
-    console.log(resultContainer.firstChild);
+    alert('stop clicking dude');
   }
 }
 
-var resultContainer = document.getElementById('result-container');
+function addMoreTrials() {
+  trials += 10;
+  showThreeNewImages();
+  moreTrialsButton.style.visibility = 'hidden';
+  resultButton.style.visibility = 'hidden';
+
+}
 
 function displayResult() {
   while(resultContainer.firstChild) {
@@ -188,4 +201,6 @@ function displayResult() {
     resultList.appendChild(item);
   }
   resultContainer.appendChild(resultList);
+  moreTrialsButton.style.visibility = 'hidden';
+  resultButton.style.visibility = 'hidden';
 }
