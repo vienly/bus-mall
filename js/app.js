@@ -151,7 +151,6 @@ resultButton.addEventListener('click', function() {
   displayResult();
   displayChart();
 });
-
 var resultContainer = document.getElementById('result-container');
 
 function processSelection(event) {
@@ -169,6 +168,7 @@ function processSelection(event) {
       alert('done');
       moreTrialsButton.style.visibility = 'visible';
       resultButton.style.visibility = 'visible';
+
     } else {
       showThreeNewImages();
     }
@@ -235,8 +235,6 @@ function displayChart() {
         backgroundColor: "rgba(204,51,17,1)",
         borderColor: "rgba(204,51,17,1)",
         borderWidth: 1,
-        // hoverBackgroundColor: "rgba(255,99,132,0.4)",
-        // hoverBorderColor: "rgba(255,99,132,1)",
         data: displayData,
         yAxisID: "y-axis-0",
       },
@@ -245,24 +243,18 @@ function displayChart() {
         backgroundColor: "rgba(0,0,0,1)",
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 1,
-        // hoverBackgroundColor: "rgba(54,162,235,0.4)",
-        // hoverBorderColor: "rgba(54,162,235,1)",
         data: clickData
       }
     ]
   };
 
-  var chartOptions = {
-	defaultFontColor: 'black',
-	defaultFontFamily: 'Fauna One',
-  defaultFontStyle: 'cursive'
-}
-
   var myBarChart = new Chart(chartCanvas.getContext('2d'), {
       type: 'bar',
       data: chartData,
-      options: chartOptions
-  })
+      options: {
+        responsive: true,
+      }
+  });
 
   chartCanvasContainer.appendChild(chartCanvas);
 }
