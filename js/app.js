@@ -1,6 +1,6 @@
 'use strict';
 
-var trials = 25;
+var trials = 10;
 var imageData = [['bag', 'jpg'],
                   ['banana', 'jpg'],
                   ['bathroom', 'jpg'],
@@ -165,6 +165,25 @@ function processSelection(event) {
     }
     trials--;
   } else {
-    alert('you\'re done!')
+    alert('you\'re done!');
+    displayResult();
+    console.log(resultContainer.firstChild);
   }
+}
+
+var resultContainer = document.getElementById('result-container');
+
+function displayResult() {
+  while(resultContainer.firstChild) {
+    resultContainer.removeChild(resultContainer.firstChild);
+  }
+
+  var resultList = document.createElement('ul');
+
+  for (var i = 0; i < allImages.imageArray.length; i++) {
+    var item = document.createElement('li');
+    item.textContent = (allImages.imageArray[i].name + ' has been clicked ' + allImages.imageArray[i].clickN + ' times out of ' + allImages.imageArray[i].displayN + ' times displayed.');
+    resultList.appendChild(item);
+  }
+  resultContainer.appendChild(resultList);
 }
