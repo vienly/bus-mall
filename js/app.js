@@ -141,13 +141,13 @@ function showThreeNewImages() {
 
 showThreeNewImages();
 
+// DOM
 var bigContainer = document.getElementById('all-image-container');
 bigContainer.addEventListener('click', processSelection);
 var moreTrialsButton = document.getElementById('more-trials-button');
 moreTrialsButton.addEventListener('click', addMoreTrials);
 var resultButton = document.getElementById('result-button');
 resultButton.addEventListener('click', displayResult);
-
 var resultContainer = document.getElementById('result-container');
 
 function processSelection(event) {
