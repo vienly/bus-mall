@@ -151,6 +151,21 @@ var buttonContainer = document.getElementById('button-container');
 var resultContainer = document.getElementById('result-container');
 var moreTrialsButton;
 var resultButton;
+moreTrialsButton = document.createElement('button');
+resultButton = document.createElement('button');
+moreTrialsButton.textContent = '10 more trials';
+resultButton.textContent = 'display result';
+moreTrialsButton.style.margin = '5px';
+resultButton.style.margin = '5px';
+moreTrialsButton.addEventListener('click', addMoreTrials);
+resultButton.addEventListener('click', function() {
+  displayResult();
+  displayChart();
+});
+var resetButton = document.createElement('button');
+resetButton.textContent = 'Reset';
+resetButton.style.margin = '5px';
+resetButton.addEventListener('click', reset);
 
 function processSelection(event) {
   if(trials) {
@@ -257,10 +272,6 @@ function displayChart() {
 
 function showResetButton() {
   removeButtons();
-  var resetButton = document.createElement('button');
-  resetButton.textContent = 'Reset';
-  resetButton.style.margin = '5px';
-  resetButton.addEventListener('click', reset);
   buttonContainer.appendChild(resetButton);
 }
 
@@ -275,17 +286,6 @@ function reset() {
 }
 
 function addButtons() {
-  moreTrialsButton = document.createElement('button');
-  resultButton = document.createElement('button');
-  moreTrialsButton.textContent = '10 more trials';
-  resultButton.textContent = 'display result';
-  moreTrialsButton.style.margin = '5px';
-  resultButton.style.margin = '5px';
-  moreTrialsButton.addEventListener('click', addMoreTrials);
-  resultButton.addEventListener('click', function() {
-    displayResult();
-    displayChart();
-  });
   buttonContainer.appendChild(moreTrialsButton);
   buttonContainer.appendChild(resultButton);
 }
