@@ -25,6 +25,30 @@ var imageData = [['bag', 'jpg'],
 var allImages;
 var currentThree = new Array();
 
+// DOM
+var bigContainer = document.getElementById('all-image-container');
+bigContainer.addEventListener('click', processSelection);
+var buttonContainer = document.getElementById('button-container');
+var resultContainer = document.getElementById('result-container');
+var moreTrialsButton;
+var resultButton;
+moreTrialsButton = document.createElement('button');
+resultButton = document.createElement('button');
+moreTrialsButton.textContent = '10 more trials';
+resultButton.textContent = 'display result';
+moreTrialsButton.style.margin = '5px';
+resultButton.style.margin = '5px';
+moreTrialsButton.addEventListener('click', addMoreTrials);
+resultButton.addEventListener('click', function() {
+  displayResult();
+  displayChart();
+});
+var resetButton = document.createElement('button');
+resetButton.textContent = 'Reset';
+resetButton.style.margin = '5px';
+resetButton.addEventListener('click', reset);
+
+
 class Image {
   constructor(name, extension) {
     this.name = name;
@@ -93,7 +117,6 @@ ImageCollection.prototype.addImage = function(image) {
   this.size = this.imageArray.length;
 }
 
-
 function collectAllImages() {
   allImages = new ImageCollection();
   for (var i = 0; i < imageData.length; i++) {
@@ -102,9 +125,6 @@ function collectAllImages() {
     allImages.addImage(newImage);
   }
 }
-collectAllImages();
-
-console.log(allImages);
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -141,31 +161,6 @@ function showThreeNewImages() {
     currentImage.incrementDisplayCount();
   }
 }
-
-showThreeNewImages();
-
-// DOM
-var bigContainer = document.getElementById('all-image-container');
-bigContainer.addEventListener('click', processSelection);
-var buttonContainer = document.getElementById('button-container');
-var resultContainer = document.getElementById('result-container');
-var moreTrialsButton;
-var resultButton;
-moreTrialsButton = document.createElement('button');
-resultButton = document.createElement('button');
-moreTrialsButton.textContent = '10 more trials';
-resultButton.textContent = 'display result';
-moreTrialsButton.style.margin = '5px';
-resultButton.style.margin = '5px';
-moreTrialsButton.addEventListener('click', addMoreTrials);
-resultButton.addEventListener('click', function() {
-  displayResult();
-  displayChart();
-});
-var resetButton = document.createElement('button');
-resetButton.textContent = 'Reset';
-resetButton.style.margin = '5px';
-resetButton.addEventListener('click', reset);
 
 function processSelection(event) {
   if(trials) {
@@ -307,3 +302,8 @@ function removeChart() {
     chartCanvasContainer.removeChild(chartCanvasContainer.firstChild);
   }
 }
+
+// run this shit
+collectAllImages();
+console.log(allImages);
+showThreeNewImages();
