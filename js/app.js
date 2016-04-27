@@ -233,7 +233,7 @@ function displayChart() {
     labels: titles,
     datasets: [
       {
-        label: "Times Displayed",
+        label: "Displayed",
         backgroundColor: "rgba(204,51,17,1)",
         borderColor: "rgba(204,51,17,1)",
         borderWidth: 1,
@@ -241,7 +241,7 @@ function displayChart() {
         yAxisID: "y-axis-0",
       },
       {
-        label: "Times Selected",
+        label: "Selected",
         backgroundColor: "rgba(0,0,0,1)",
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 1,
