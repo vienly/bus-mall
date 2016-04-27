@@ -208,8 +208,6 @@ function displayResult() {
   showResetButton();
   resultContainer.appendChild(resultHeader);
   resultContainer.appendChild(resultList);
-  // moreTrialsButton.style.visibility = 'hidden';
-  // resultButton.style.visibility = 'hidden';
 }
 
 // charting
