@@ -224,6 +224,7 @@ function displayResult() {
   showResetButton();
   resultContainer.appendChild(resultHeader);
   resultContainer.appendChild(resultList);
+  localStorage.clear();
 }
 
 // charting
