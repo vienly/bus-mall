@@ -49,7 +49,6 @@ resetButton.textContent = 'Reset';
 resetButton.style.margin = '5px';
 resetButton.addEventListener('click', reset);
 
-
 class Image {
   constructor(name, extension) {
     this.name = name;
