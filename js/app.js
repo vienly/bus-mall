@@ -1,7 +1,7 @@
 'use strict';
 
 // global shits
-var trials = 5;
+var trials = 10;
 var imageData = [['bag', 'jpg'],
                   ['banana', 'jpg'],
                   ['bathroom', 'jpg'],
