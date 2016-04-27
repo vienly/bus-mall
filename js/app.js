@@ -1,7 +1,7 @@
 'use strict';
 
 // global shits
-var trials = 10;
+var trials = 5;
 var imageData = [['bag', 'jpg'],
                   ['banana', 'jpg'],
                   ['bathroom', 'jpg'],
@@ -26,11 +26,16 @@ var imageData = [['bag', 'jpg'],
 var allImages;
 var currentThree = new Array();
 
+// for localStorage
+var dataStore = new Array(20);
+
 // DOM
-var bigContainer = document.getElementById('all-image-container');
-bigContainer.addEventListener('click', processSelection);
-var buttonContainer = document.getElementById('button-container');
+var bigImageContainer = document.getElementById('all-image-container');
+bigImageContainer.addEventListener('click', processSelection);
+
 var resultContainer = document.getElementById('result-container');
+
+var buttonContainer = document.getElementById('button-container');
 var moreTrialsButton;
 var resultButton;
 moreTrialsButton = document.createElement('button');
@@ -39,11 +44,15 @@ moreTrialsButton.textContent = '10 more trials';
 resultButton.textContent = 'display result';
 moreTrialsButton.style.margin = '5px';
 resultButton.style.margin = '5px';
-moreTrialsButton.addEventListener('click', addMoreTrials);
+moreTrialsButton.addEventListener('click', function() {
+  storeData();
+  addMoreTrials();
+});
 resultButton.addEventListener('click', function() {
   displayResult();
   displayChart();
 });
+
 var resetButton = document.createElement('button');
 resetButton.textContent = 'Reset';
 resetButton.style.margin = '5px';
@@ -59,6 +68,12 @@ class Image {
     this.clickN = 0;
     this.percentage = this.calculatePercentage();
   }
+}
+
+Image.prototype.set = function(clickN, displayN) {
+  this.displayN = displayN;
+  this.clickN = clickN;
+  this.calculatePercentage();
 }
 
 Image.prototype.calculatePercentage = function() {
@@ -171,13 +186,16 @@ function processSelection(event) {
       console.log(selectedImage.name + ' has been displayed ' + selectedImage.displayN + ' times');
     }
     trials--;
+    storeData();
     if(trials <= 0) {
       alert('done');
+      removeImages();
       addButtons();
     } else {
       showThreeNewImages();
     }
   } else {
+    // removeImages();
     alert('stop clicking dude');
   }
 }
@@ -267,6 +285,8 @@ function showResetButton() {
 }
 
 function reset() {
+  localStorage.clear();
+
   trials = 5;
   collectAllImages();
   showThreeNewImages();
@@ -274,6 +294,16 @@ function reset() {
   removeButtons();
   removeResult();
   removeChart();
+}
+
+function removeImages() {
+  var container;
+  for (var i = 0; i < currentThree.length; i++) {
+    container = document.getElementById('image-container' + i);
+    if (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+  }
 }
 
 function addButtons() {
@@ -299,7 +329,34 @@ function removeChart() {
   }
 }
 
+function storeData() {
+  for (var n = 0; n < allImages.imageArray.length; n++) {
+      dataStore[n] = [allImages.imageArray[n].clickN, allImages.imageArray[n].displayN];
+  }
+  localStorage.setItem('clickData', JSON.stringify(dataStore));
+  localStorage.setItem('trialsData', JSON.stringify(trials));
+}
+
+function loadData() {
+  var retrievedData = JSON.parse(localStorage.clickData);
+  trials = JSON.parse(localStorage.trialsData);
+  for (var n = 0; n < allImages.imageArray.length; n++) {
+      allImages.imageArray[n].set(retrievedData[n][0], retrievedData[n][1]);
+  }
+  console.log(allImages);
+}
+
 // run this shit
 collectAllImages();
 console.log(allImages);
-showThreeNewImages();
+if(localStorage.clickData) {
+  loadData();
+  console.log('hello');
+  if(!trials) {
+    addButtons();
+  } else {
+    showThreeNewImages();
+  }
+} else {
+  showThreeNewImages();
+}
